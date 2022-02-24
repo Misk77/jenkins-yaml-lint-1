@@ -1,0 +1,19 @@
+name: Michel-test-directory repo
+on:
+  push:
+    branches:
+      - main
+env:
+  ANSIBLE_CONFIG = 'solace-ansible/ansible.cfg'
+  SLACK_TOKEN = credentials('atg-slack-token')
+  VAULT_DEVTEST_CREDENTIAL = credentials('AnsibleVaultTestPassword')
+  //VAULT_MGMT_devtest_CREDENTIAL = credentials('SOLACE_devtest_MGMT_CREDENTIAL')
+  FILE_devtest = '/var/lib/jenkins/ansible-vault/.vault_devtest_secret' 
+  
+jobs:
+  lintAllTheThings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: yaml-lint
+        uses: ibiqlik/action-yamllint@v3
