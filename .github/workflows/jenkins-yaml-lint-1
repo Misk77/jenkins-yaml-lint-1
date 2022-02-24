@@ -1,8 +1,10 @@
 name: Michel-test-directory repo
-on:
+on: # rebuild any PRs and main branch changes
+  pull_request:
   push:
     branches:
-      - main
+      - master
+      
 env:
   ANSIBLE_CONFIG = 'solace-ansible/ansible.cfg'
   SLACK_TOKEN = credentials('atg-slack-token')
